@@ -1,70 +1,169 @@
+// import React from "react";
+// import {
+//   Text,
+//   Link,
+//   HStack,
+//   Center,
+//   Heading,
+//   Switch,
+//   useColorMode,
+//   NativeBaseProvider,
+//   extendTheme,
+//   VStack,
+//   Box,
+// } from "native-base";
+// import NativeBaseIcon from "./components/NativeBaseIcon";
+// import { Platform } from "react-native";
+
+// // Define the config
+// const config = {
+//   useSystemColorMode: false,
+//   initialColorMode: "dark",
+// };
+
+// // extend the theme
+// export const theme = extendTheme({ config });
+
+// export default function App() {
+//   return (
+//     <NativeBaseProvider>
+//       <Center
+//         _dark={{ bg: "blueGray.900" }}
+//         _light={{ bg: "blueGray.50" }}
+//         px={4}
+//         flex={1}
+//       >
+//         <VStack space={5} alignItems="center">
+//           <NativeBaseIcon />
+//           <Heading size="lg">Welcome to NativeBase</Heading>
+//           <HStack space={2} alignItems="center">
+//             <Text>Edit</Text>
+//             <Box
+//               _web={{
+//                 _text: {
+//                   fontFamily: "monospace",
+//                   fontSize: "sm",
+//                 },
+//               }}
+//               px={2}
+//               py={1}
+//               _dark={{ bg: "blueGray.800" }}
+//               _light={{ bg: "blueGray.200" }}
+//             >
+//               App.js
+//             </Box>
+//             <Text>and save to reload.</Text>
+//           </HStack>
+//           <Link href="https://docs.nativebase.io" isExternal>
+//             <Text color="primary.500" underline fontSize={"xl"}>
+//               Learn NativeBase
+//             </Text>
+//           </Link>
+//           <ToggleDarkMode />
+//         </VStack>
+//       </Center>
+//     </NativeBaseProvider>
+//   );
+// }
+
 import React from "react";
 import {
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
   Text,
-  Link,
-  HStack,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Box,
-} from "native-base";
-import NativeBaseIcon from "./components/NativeBaseIcon";
-import { Platform } from "react-native";
+  StatusBar,
+} from "react-native";
 
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
+const DATA = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+  },
+];
+
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
+const App = () => {
+  const renderItem = ({ item }) => <Item title={item.title} />;
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
+  );
 };
 
-// extend the theme
-export const theme = extendTheme({ config });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
 
-export default function App() {
-  return (
-    <NativeBaseProvider>
-      <Center
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
-        px={4}
-        flex={1}
-      >
-        <VStack space={5} alignItems="center">
-          <NativeBaseIcon />
-          <Heading size="lg">Welcome to NativeBase</Heading>
-          <HStack space={2} alignItems="center">
-            <Text>Edit</Text>
-            <Box
-              _web={{
-                _text: {
-                  fontFamily: "monospace",
-                  fontSize: "sm",
-                },
-              }}
-              px={2}
-              py={1}
-              _dark={{ bg: "blueGray.800" }}
-              _light={{ bg: "blueGray.200" }}
-            >
-              App.js
-            </Box>
-            <Text>and save to reload.</Text>
-          </HStack>
-          <Link href="https://docs.nativebase.io" isExternal>
-            <Text color="primary.500" underline fontSize={"xl"}>
-              Learn NativeBase
-            </Text>
-          </Link>
-          <ToggleDarkMode />
-        </VStack>
-      </Center>
-    </NativeBaseProvider>
-  );
-}
+export default App;
 
 // Color Switch Component
 function ToggleDarkMode() {
